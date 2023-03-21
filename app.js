@@ -5,6 +5,7 @@ const dotenv = require('dotenv');
 const morgan = require('morgan');
 const passport = require('passport');
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
 const { engine } = require('express-handlebars');
 
 const connectDB = require('./config/db');
@@ -34,6 +35,7 @@ app.use(
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: false,
+    // store: MongoStore.create(),
   })
 );
 
