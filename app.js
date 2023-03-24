@@ -9,7 +9,7 @@ const MongoStore = require('connect-mongo');
 const { engine } = require('express-handlebars');
 
 const connectDB = require('./config/db');
-const { formatDate, stripTags, truncate } = require('./helpers/hbs');
+const { formatDate, stripTags, truncate, editIcon } = require('./helpers/hbs');
 
 // Load config
 dotenv.config({ path: './config/config.env' });
@@ -34,7 +34,7 @@ if (process.env.NODE_ENV === 'development') {
 app.engine(
   '.hbs',
   engine({
-    helpers: { formatDate, stripTags, truncate },
+    helpers: { formatDate, stripTags, truncate, editIcon },
     defaultLayout: 'main',
     extname: '.hbs',
   })
@@ -54,6 +54,12 @@ app.use(
 // Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Set global var
+app.use(function (req, res, next) {
+  res.locals.user = req.user || null;
+  next();
+});
 
 // Static folder
 app.use(express.static(path.join(__dirname, 'public')));
