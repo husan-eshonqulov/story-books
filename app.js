@@ -9,6 +9,7 @@ const MongoStore = require('connect-mongo');
 const { engine } = require('express-handlebars');
 
 const connectDB = require('./config/db');
+const { formatDate } = require('./helpers/hbs');
 
 // Load config
 dotenv.config({ path: './config/config.env' });
@@ -30,7 +31,10 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // Handlebars
-app.engine('.hbs', engine({ defaultLayout: 'main', extname: '.hbs' }));
+app.engine(
+  '.hbs',
+  engine({ helpers: { formatDate }, defaultLayout: 'main', extname: '.hbs' })
+);
 app.set('view engine', '.hbs');
 
 // Sessions
