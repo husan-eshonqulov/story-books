@@ -14,6 +14,6 @@ The Story Books is a project developed to learn and apply Node.js technologies. 
 
 ## Links
 
-__Demo__: https://story-books-x3k8.onrender.com
+__Demo__: https://story-books.up.railway.app
 
 __Source__: https://github.com/husan-eshonqulov/story-books
